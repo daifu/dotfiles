@@ -1,2 +1,5 @@
 export EDITOR="mvim"
 export PATH=~/bin:$PATH
+export CLICOLOR=1
+export LSCOLORS=ExFxCxDxBxegedabagacad
+
