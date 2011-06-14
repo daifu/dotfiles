@@ -1,0 +1,44 @@
+Directory
+=========
+At first, I am assuming you save this dotfiles in your directory under ~/bin
+
+Setup
+=========
+Then, let's modify the .bash_profile and .bashrc in the directory: ~/
+Use your favor text editor to edit, for example, I use mvim to edit them, so
+$ mvim ~/.bashrc ~/.bash_profile
+
+Add the following line to .bashrc:
+. ~/bin/dotfiles/bashrc
+
+Add the following lines to .bash_profile:
+if [ -f ~/.bashrc ];
+then
+   source ~/.bashrc
+fi
+
+Environment
+===========
+Execute env file:
+source ~/bin/dotfiles/bash/env
+
+After that you should echo $PATH, and you should see ....:/Users/[your username]/bin at the end of the line
+
+Then you should good to go and add your favorite configuration to dotfiles.
+
+Dependency
+==========
+You might not have vcprompt, and you should checkout xvzf/vcprompt in github:
+Here are the installing procedure:
+
+$ git clone git://github.com/xvzf/vcprompt.git
+$ cd vcprompt
+$ python setup.py install
+
+VIM
+===========
+ln -s ~/bin/dotfiles/vim ~/.vim
+
+Add this line to the .vimrc:
+source ~/bin/dotfiles/vimrc
+
