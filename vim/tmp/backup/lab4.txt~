@@ -1,0 +1,117 @@
+#Extract the coreutils-8.0.tar.gz to the local directory
+tar -vxf coreutils-8.0.tar.gz
+
+#save the patch file from the website as lab4.diff and 
+#put the file to the directory: coreutils-8.0
+#run the command
+patch -p0 < lab4.diff --dry-run -R
+
+#Got this result:
+patching file NEWS
+Hunk #1 succeeded at 1661 (offset 1470 lines).
+patching file src/rm.c
+Hunk #1 FAILED at 51.
+Hunk #2 FAILED at 97.
+Hunk #3 FAILED at 251.
+3 out of 3 hunks FAILED -- saving rejects to file src/rm.c.rej
+
+#Use vim the edit lab4.dIndex: NEWS
+===================================================================
+RCS file: /fetish/cu/NEWS,v
+retrieving revision 1.304
+diff -p -u -r1.304 NEWS
+--- NEWS    	23 Aug 2005 16:39:01 -0000  	1.304
++++ NEWS    	29 Aug 2005 21:11:54 -0000
+@@ -191,6 +191,9 @@ GNU coreutils NEWS                 	 
+   If stdin is a terminal, nohup now redirects it from /dev/null to
+   prevent the command from tying up an OpenSSH session after you logout.
+ 
++  "rm -FOO" now suggests "rm ./-FOO" if the file "-FOO" exists and
++  "-FOO" is not a valid option.
++
+   stat -f -c %S outputs the fundamental block size (used for block counts).
+   stat -f's default output format has been changed to output this size as well.
+   stat -f recognizes file systems of type XFS and JFS
+Index: src/rm.c
+===================================================================
+RCS file: /fetish/cu/src/rm.c,v
+retrieving revision 1.134
+diff -p -u -r1.134 rm.c
+--- src/rm.c	14 May 2005 07:58:37 -0000  	1.134
++++ src/rm.c	29 Aug 2005 21:11:54 -0000
+@@ -28,6 +28,7 @@
+ #include "argmatch.h"
+ #include "error.h"
+ #include "quote.h"
++#include "quotearg.h"
+ #include "remove.h"
+ #include "root-dev-ino.h"
+ #include "yesno.h"
+@@ -97,6 +98,33 @@
+ };
+ ARGMATCH_VERIFY (interactive_args, interactive_types);
+ 
++/* Advise the user about invalid usages like "rm -foo" if the file
++   "-foo" exists, assuming ARGC and ARGV are as with `main'.  */
++
++static void
++diagnose_leading_hyphen (int argc, char **argv)
++{
++  /* OPTIND is unreliable, so iterate through the arguments looking
++ 	for a file name that looks like an option.  */
++  int i;
++
++  for (i = 1; i < argc; i++)
++	{
++  	char const *arg = argv[i];
++  	struct stat st;
++
++  	if (arg[0] == '-' && arg[1] && lstat (arg, &st) == 0)
++    	{
++      	fprintf (stderr,
++               	_("Try `%s ./%s' to remove the file %s.\n"),
++               	argv[0],
++               	quotearg_n_style (1, shell_quoting_style, arg),
++               	quote (arg));
++      	break;
++    	}
++	}
++}
++
+ void
+ usage (int status)
+ {
+@@ -281,6 +309,7 @@
+     	case_GETOPT_HELP_CHAR;
+     	case_GETOPT_VERSION_CHAR (PROGRAM_NAME, AUTHORS);
+     	default:
++      	diagnose_leading_hyphen (argc, argv);
+       	usage (EXIT_FAILURE);
+     	}
+ 	}
+#after i re-ran the command 
+patch -p0 < lab4.diff --dry-run -R
+#result:
+patching file NEWS
+Hunk #1 succeeded at 1661 (offset 1470 lines).
+patching file src/rm.c
+
+#so I know this is successful:
+patch -p0 < lab4.diff -R
+
+#then I test it with
+./configure && make
+
+#go the /test folder and add these files
+touch ./-oops a b c 
+
+#run this command to test the rm command from the coreutils-8.0
+./../coreutils-8.0/src/rm *
+
+#I got these reuslts:
+./../coreutils-8.0/src/rm: invalid option -- 'o'
+Try `./../coreutils-8.0/src/rm --help' for more information.
+
+#Use diff the save the patch file:
+diff -u /tmp/rm.c src/rm.c > lab4.diff
+

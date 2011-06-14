@@ -1,0 +1,96 @@
+require 'rubygems'
+require 'algorithms'
+include Containers
+
+def is_go(currButton, dest)
+  if currButton == dest
+    return false
+  else
+    return true
+  end
+end
+
+def move(start, dest)
+  if start < dest
+    return start + 1
+  elsif start > dest
+    return start - 1
+  else
+    return start
+  end
+end
+
+fp = open(ARGV[0], "r")
+ofp = open(ARGV[1], "w")
+n_map = fp.readline.chomp
+puts n_map
+
+(1..n_map.to_i).each{|i|
+  blue = Containers::Queue.new([1])
+  orange = Containers::Queue.new([1])
+  order = Containers::Queue.new()
+  time = 0 #result
+  
+  queue = Containers::Queue.new()
+  fp.readline.chomp.split.each do |e|
+    queue.push(e)
+  end
+  numOfPresses = queue.pop
+  while queue.size > 0 do
+    temp = queue.pop
+    order.push(temp)
+    if temp == "O"
+      orange.push(queue.pop)
+    else
+      blue.push(queue.pop)
+    end
+  end
+  
+  blueCurrButton = blue.pop.to_i
+  orangeCurrButton = orange.pop.to_i
+  
+  if blue.size > 0
+    blueNextButton = blue.pop.to_i
+  else
+    blueNextButton = blueCurrButton
+  end
+  
+  if orange.size > 0
+    orangeNextButton = orange.pop.to_i
+  else
+    orangeNextButton = orangeCurrButton
+  end
+  
+  while order.size > 0 do
+    orderRobot = order.pop
+    if orderRobot == "O"
+      while is_go(orangeCurrButton, orangeNextButton) do
+        blueCurrButton = move(blueCurrButton, blueNextButton)
+        orangeCurrButton = move(orangeCurrButton, orangeNextButton)
+        time = time + 1
+      end
+      time = time + 1
+      blueCurrButton = move(blueCurrButton, blueNextButton)
+      if orange.size > 0
+        orangeNextButton = orange.pop.to_i
+      end
+    elsif orderRobot == "B"
+      while is_go(blueCurrButton, blueNextButton) do
+        blueCurrButton = move(blueCurrButton, blueNextButton)
+        orangeCurrButton = move(orangeCurrButton, orangeNextButton)
+        time = time + 1
+      end
+      time = time + 1
+      orangeCurrButton = move(orangeCurrButton, orangeNextButton)
+      if blue.size > 0
+        blueNextButton = blue.pop.to_i
+      end
+    end
+  end
+  
+  ofp.puts("Case ##{i}: #{time}")
+  puts("Case ##{i}: #{time}")
+}
+
+fp.close
+ofp.close

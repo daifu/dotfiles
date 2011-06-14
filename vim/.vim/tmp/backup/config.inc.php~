@@ -1,0 +1,57 @@
+<?php
+
+/************************************************/
+/***  APPLICATION CONFIG                      ***/
+/************************************************/
+
+// Public path of skoob's /webapp/ folder on your web server.
+// For example, if the /webapp/ folder is located at http://yourdomain/tweets/, set to '/tweets/'.
+$GLOBALSROI_CFG['site_root_path']            = '/Globalsroi/';
+
+// Full server path to /skoob/ folder.
+$GLOBALSROI_CFG['source_root_path']          = '/Users/daifuye/Globalsroi/';
+
+// Your GMT offset, not (necessarily) your web server's. Pacific: 7, Eastern: 4
+$GLOBALSROI_CFG['GMT_offset']                = 7;
+
+// Your timezone
+$GLOBALSROI_CFG['timezone']                  = 'America/Los_Angeles';
+
+// Toggle Smarty caching. true: Smarty caching on, false: Smarty caching off
+$GLOBALSROI_CFG['cache_pages']               = true;
+
+// Application title
+$GLOBALSROI_CFG['app_title']                 = 'Globalsroi';
+
+// Full server path to crawler.log.
+$GLOBALSROI_CFG['log_location']              = $GLOBALSROI_CFG['source_root_path'].'logs/crawler.log';
+
+// Full server path to sql.log. To not log queries, set to null.
+$GLOBALSROI_CFG['sql_log_location']          = $GLOBALSROI_CFG['source_root_path'].'logs/sql.log';
+
+// How many seconds does a query take before it gets logged as a slow query?
+$GLOBALSROI_CFG['slow_query_log_threshold']  = 2.0;
+
+// Full server path to bundled Smarty template library.
+$GLOBALSROI_CFG['smarty_path']               = $GLOBALSROI_CFG['source_root_path'].'extlib/Smarty-2.6.26/libs/';
+
+$GLOBALSROI_CFG['debug']                     = true;
+
+$GLOBALSROI_CFG['enable_profiler']           = false;
+
+// Set whether or not your site's registration page is available.
+// @TODO Build email invitation system so this isn't simply a binary choice.
+$GLOBALSROI_CFG['is_registration_open']      = true;
+
+/************************************************/
+/***  DATABASE CONFIG                         ***/
+/************************************************/
+
+$GLOBALSROI_CFG['db_host']                   = 'localhost'; //On a shared host? Try mysql.yourdomain.com, or see your web host's documentation.
+$GLOBALSROI_CFG['db_type']                   = 'mysql';
+$GLOBALSROI_CFG['db_user']                   = 'root';
+$GLOBALSROI_CFG['db_password']               = '';
+$GLOBALSROI_CFG['db_name']                   = 'globalsroi_development';
+$GLOBALSROI_CFG['db_socket']                 = '/private/tmp/mysql.sock';
+$GLOBALSROI_CFG['db_port']                   = '3306';
+$GLOBALSROI_CFG['table_prefix']              = '';

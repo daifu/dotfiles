@@ -1,0 +1,39 @@
+import ValidateData
+import datetime
+import Model
+import hashlib
+from google.appengine.ext import db
+from google.appengine.api import users
+
+class User:
+   def __init__(self, str):
+      self.name = ""
+      if not (ValidateData.isUserExist(str)):
+         self.name = str 
+         self.error = "NONE" 
+      else:
+         self.error = "Error: User Name already exist."
+
+   def createUser(self, gender, age, weight):
+      userAcc = User.requireUserAccount()
+      md5Key = hashlib.md5(self.name).hexdigest()
+      u = Model.UsersModel(name = self.name,
+                gender = gender,
+                age = age,
+                weight = float(weight),
+                created_at=datetime.datetime.now().date(),
+                account=userAcc)
+      u.put()
+
+   def updateUser(self, gender, age, weight, name):
+      """docstring for updateUser"""
+      pass
+  
+   @staticmethod
+   def requireUserAccount():
+      '''Ask user to login if they are not loggedin''' 
+      user = users.get_current_user()
+      if user:
+         user
+      else:
+        "None Registered User"

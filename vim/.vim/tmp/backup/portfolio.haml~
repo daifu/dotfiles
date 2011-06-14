@@ -1,0 +1,160 @@
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-type"}/
+    %title Daifu Ye Portfolio
+    %link{:href => "/stylesheets/portfolio.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "/stylesheets/application.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
+    /[if lte IE 6] <link rel="stylesheet" href="css/ie6.css" type="text/css" media="all" />
+    %script{:src => "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js", :type => "text/javascript"}
+    %script{:src => "../javascript/jquery.tools.min.js", :type => "text/javascript"}
+    %script{:src => "../javascript/cufon-yui.js", :type => "text/javascript"}
+    %script{:src => "../javascript/jquery.jcarousel.pack.js", :type => "text/javascript"}
+    %script{:src => "../javascript/TeXGyreSchola.font.js", :type => "text/javascript"}
+    :javascript
+      jQuery(document).ready(function() {
+          jQuery('#mycarousel').jcarousel({
+            scroll: 1,
+            animation: "slow",
+            wrap: "both"
+          });
+      });
+      Cufon.replace('h1', { textShadow: '#000 1px 1px' });
+      Cufon.replace('h2', { textShadow: '#000 1px 1px' });
+      Cufon.replace('div.section div h3', { textShadow: '#000 1px 1px' });
+    /[if IE 6]
+      <script src="js/DD_belatedPNG.js"></script>
+      <script>DD_belatedPNG.fix('.png_bg, #container, div.tagline p, div.section h2, div.section ul li, div.section div.interests h3, div.section div.contact h3, div.section div.contact p, div.header img, div.section div.interests ul li img');</script>
+  %body
+    / Header
+    #header
+      .shell
+        .cl &nbsp;
+        / Logo
+        #logo-cnt
+          %h1#logo Daifu Ye
+        / End Logo
+        #menu
+          %ul
+            %li
+              %a{:href => "#"} Portfolio
+            %li
+              %a{:href => "/resume"} Resume
+            %li#status
+              I am
+              %strong available now
+        .cl &nbsp;
+        / Carousel
+        #slider
+          %ul#mycarousel
+            %li
+              .img-cnt
+                %img{:alt => "", :src => "images/Skoob-Home.png", :title => "Only available to see in localhost", :class => "not_available"}/
+            %li
+              .img-cnt
+                %img{:alt => "", :src => "images/realestateroot.png", :title => "Only available to see in localhost", :class => "not_available"}/
+            %li
+              .img-cnt
+                %img{:alt => "", :src => "images/socialflirtr.com.png", :title => "Only available to see in localhost", :class => "not_available"}/
+            %li
+              .img-cnt
+                %a{:href => "https://chrome.google.com/extensions/detail/gmpnbibondcjmkmmdmdjahgoglpendge"}
+                  %img{:alt => "", :src => "images/visualTabs.png"}/
+            %li
+              .img-cnt
+                %img{:alt => "", :src => "images/sandisk_eaudit.png", :title => "Only available to see in localhost", :class => "not_available"}/
+            %li
+              .img-cnt
+                %a{:href => "http://www.convertandco.com"}
+                  %img{:alt => "", :src => "images/CovertAndCo.png"}/
+
+        / End Carousel
+    / End Header
+    / Main
+    #main
+      .shell
+        / Article
+        .article
+          %h2 Some words about me:
+          %p I love developing applications with the end-user experience and using different programming languages with or without frameworks to make jobs done. Before, I had developed one internal software for SanDisk with Cakephp framework in a team, and few web applications with Ruby On Rails. I currently study at De Anza College and work on web applications in Rails, and chrome extensions during my free time.
+          %p Hopefully my applications will be useful and attractive for most users.
+          %h2 My Specialties:
+          %p I have developed server side using ruby and php. On the client side, I have developed chrome extensions(mostly javascript/html/css). I also have learned C and Java in De Anza College
+          %p For the computer hardware, I experienced computer installation and repair.
+        / End Article
+        / Gallery
+        .gallery
+          .cl &nbsp;
+          %h2.left What I can do?
+          .cl &nbsp;
+          .cl &nbsp;
+          .portfolio-item
+            %a{:href => "http://www.rubyonrails.org"}
+              %img{:alt => "", :src => "images/rails.jpg"}/
+            %a{:href => "http://www.rubyonrails.org"} Ruby On Rails
+          .portfolio-item
+            %a{:href => "http://www.cakephp.org"}
+              %img{:alt => "", :src => "images/cakephp-logo.png"}/
+            %a{:href => "http://www.cakephp.org"} CakePHP
+          .portfolio-item
+            %a{:href => "http://www.sinatrarb.com"}
+              %img{:alt => "", :src => "images/sinatra_logo.jpg"}/
+            %a{:href => "http://www.sinatrarb.com/"} Sinatra            
+          .portfolio-item.last
+            %a{:href => "http://www.jquery.com"}
+              %img{:alt => "", :src => "images/jQuery_logo.jpg", :height => "155px"}/
+            %a{:href => "http://www.jquery.com/"} jQuery            
+          .cl &nbsp;
+        .gallery
+          .cl &nbsp;
+          %h2.left What I have done?
+          .cl &nbsp;
+          .cl &nbsp;
+          .portfolio-item
+            %a{:href => "https://chrome.google.com/extensions/detail/gmpnbibondcjmkmmdmdjahgoglpendge"}
+              %img{:alt => "", :src => "images/visualTabs.png", :width => "221px", :height => "155px"}/
+            %a{:href => "https://chrome.google.com/extensions/detail/gmpnbibondcjmkmmdmdjahgoglpendge"} Visual Tabs
+          .portfolio-item
+            %img{:alt => "", :src => "images/realestateroot.png", :width => "221px", :height => "155px"}/
+            %a{:href => "#"} Real Estate Search Engine 
+          .portfolio-item
+            %img{:alt => "", :src => "images/socialflirtr.com.png", :width => "221px", :height => "155px"}/
+            %a{:href => "#"} Social Dating Site Connected By Twitter
+          .portfolio-item.last
+            %img{:alt => "", :src => "images/sandisk_eaudit.png", :width => "221px", :height => "155px"}/
+            %a{:href => "#"} SanDisk E-Audit
+          .cl &nbsp;
+        / End Gallery
+        / Contact
+        .article
+          %h2 Contact me?
+          %form{:method => "post", :action => ""}
+            .cl &nbsp;
+            .column-cnt
+              .cl &nbsp;
+              .column
+                %label{:for => "your-name"} Your Name?
+                %span.text-field
+                  %input#your-name{:type => "text", :value => "", :name => "name"}/
+              .column
+                %label{:for => "your-email"} Your E-mail address?
+                %span.text-field
+                  %input#your-email{:type => "text", :value => "", :name => "email"}/
+              .cl &nbsp;
+              %p Thanks for sending me a comment, and it will be a great help and offer to me.
+            .column-big
+              %label{:for => "your-message"} Your Message
+              %span.text-area
+                %textarea#your-message{:cols => "", :rows => "", :name => "message"}
+              %input{:type => "submit", :value => "Message"}
+            .cl &nbsp;
+        / End Contact
+    / End Main
+    #footer
+      %p
+        \&copy; Sitename.com. Design by
+        %a{:href => "http://chocotemplates.com"} ChocoTemplates.com
+    :javascript
+      (function($){
+        $(".not_available").tooltip();
+      }(jQuery));

@@ -1,0 +1,88 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="js/libs/modernizr-1.7.min.js"></script>
+  <style>
+   #boxes .window {
+    position:absolute;
+    left:0;
+    top:0;
+    width:440px;
+    height:200px;
+    display:none;
+    z-index:9999;
+    padding:20px;
+  }
+
+   #boxes #dialog1 {
+      width:375px;
+      height:203px;
+   }
+
+   #dialog1 .d-header {
+      background:url(img/login-header.png) no-repeat 0 0 transparent;
+      width:375px;
+      height:150px;
+   }
+
+   #dialog1 .d-header input {
+      position:relative;
+      top:60px;
+      left:100px;
+      border:3px solid #cccccc;
+      height:22px;
+      width:200px;
+      font-size:15px;
+      padding:5px;
+      margin-top:4px;
+   }
+
+   #dialog1 .d-blank {
+      float:left;
+      background:url(img/login-blank.png) no-repeat 0 0 transparent;
+      width:267px;
+      height:53px;
+   }
+
+   #dialog1 .d-login {
+      float:left;
+      width:108px;
+      height:53px;
+   }
+   
+   #submit {
+      background: url(img/login-button.png) no-repeat 0 0 transparent;
+      width: 108px;
+      height: 53px;
+      border: 0;
+   }
+  </style>
+</head>
+
+   <body>
+       <div id="boxes">
+          <div id="dialog1" class="window">
+              <form method="post" action="index.php#aboutTheProject">
+                <div class="d-header">
+                 <input type="text" value="username" onclick="this.value=''" name="username"/><br/>
+                 <input type="password" value="Password" onclick="this.value=''" name="pwd"/> 
+               </div>
+               <div class="d-blank"></div>
+               <div class="d-login"><input type="submit" name="submit" id="submit" value=''/></div>
+            </form> 
+            <?php if(isset($response)) { ;?>
+               <script>
+                alert( <?php echo $response; ?>);
+               </script>
+            <?php }; ?>
+          </div>
+       </div>
+   </body>
+</html>

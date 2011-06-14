@@ -1,0 +1,90 @@
+#!/usr/bin/env python
+#
+# Copyright 2007 Google Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+import logging
+import datetime
+import sys
+import User
+import ValidateData
+import WorkOutController
+
+from google.appengine.api import users
+from google.appengine.ext import db
+from google.appengine.ext import webapp
+from google.appengine.ext.webapp import util
+
+class MainHandler(webapp.RequestHandler):
+    def get(self):
+        self.response.out.write('Hello world!')
+
+class ListenForRestClient(webapp.RequestHandler):
+   def get(self):
+      user_name = self.request.get('u')
+      gender = self.request.get('g')
+      age = int(self.request.get('a'))
+      weight = float(self.request.get('w'))
+      #wunit = self.request.get('wu')
+      options = self.request.get('op')
+      user = User.User(user_name)
+      if user.error == "NONE":
+         if options == "show": 
+            re = ValidateData.getUserInfo()
+            for p in re:
+               self.response.out.write(p.name)
+         elif options == "create":
+            #vaidate the data first
+            error = ValidateData.validateUserInfo(user_name, gender, age, weight)
+            if (error == "NONE"):
+               user.createUser(gender, age, weight)
+               self.response.out.write("Success")
+            else:
+               self.response.out.write(error)
+         elif options == "update":
+            user.updateUser(gender, age, weight, name)
+            self.response.out.write("Success")
+      else:
+         self.response.out.write(user.error)
+
+class WorkOut(webapp.RequestHandler):
+   def get(self):
+      user_name = self.request.get('u')
+      calorie = self.request.get('cal')
+      time = self.request.get('t')
+      options = self.request.get('op')
+      if options == "show":
+         woHistory = WorkOutController.WorkOutController(user_name)
+         data = woHistory.getAllData()
+         for d in data:
+            print d.to_xml()
+      else:
+         woHistory = WorkOutController.WorkOutController(user_name)
+         error = woHistory.storeData(calorie, time)
+         if error == "NONE":
+            self.response.out.write("Success")
+         else:
+            self.response.out.write(error)
+      
+
+def main():
+   application = webapp.WSGIApplication([('/', MainHandler), 
+                                         ('/listenforrestclient', ListenForRestClient),
+                                         ('/workout', WorkOut)],
+                                        debug=True)
+   util.run_wsgi_app(application)
+
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,68 @@
+// This is the app object.
+var app = {};
+
+//Hover function in app
+app.hover = function(event) {
+   var row = document.getElementsByClassName("cls");
+   var lenghtOfRow = row.length;
+
+   for(var i = 0; i < lenghtOfRow; i++) {
+      row[i].onmouseover = hoverEventHandler;
+      row[i].onmouseout = mouseOutHandler;
+   }    
+}
+
+//Mouse Over each row
+function hoverEventHandler() {
+   addClassName(this, "hover");
+}
+
+//Mouse Out Handler
+function mouseOutHandler() {
+   removeClassName(this, "hover");
+}
+
+//Add one class name if it does not exists
+function addClassName(obj, newName) {
+   if (obj.className) {
+      var clsName = obj.className.split(' '),
+          lengthOfClassName,
+          isDuplicated = false;
+      var strClassUpper = newName.toUpperCase();
+      for (var i = 0; i < lengthOfClassName && !isDuplicated; i++) {
+         if(clsName[i].toUpperCase() == strClassUpper) {
+            isDuplicated = true;
+         }
+      }
+      if (isDuplicated) {
+         return;
+      } else {
+         clsName[i + 1] = newName;
+         obj.className = clsName.join(' ');
+      }
+   }
+}
+
+//Remove one class name if it exists
+function removeClassName(obj, removeName) {
+   if (obj.className) {
+      var clsName = obj.className.split(' '),
+          lengthOfClassName = clsName.length,
+          isFindDuplicate = false;
+      var strClassUpper = removeName.toUpperCase();
+      for (var i = 0; i < lengthOfClassName && !isFindDuplicate; i++) {
+         if(clsName[i].toUpperCase() == strClassUpper) {
+            clsName.splice(i, 1);
+            isFindDuplicate = true;
+         }
+      }
+
+      if(isFindDuplicate) {
+         obj.className = clsName.join(' ');
+      }
+   }
+
+}
+
+//Main Runing Functions:
+app.hover();

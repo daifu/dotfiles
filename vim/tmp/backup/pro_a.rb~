@@ -1,0 +1,96 @@
+require 'rubygems'
+require 'algorithms'
+include Containers
+
+def is_go(currButton, dest)
+  if currButton == dest
+    return false
+  else
+    return true
+  end
+end
+
+def go(start, dest)
+  if start < dest
+    return start + 1
+  elsif start > dest
+    return start - 1
+  else
+    return start
+  end
+end
+
+fp = open(ARGV[0], "r")
+ofp = open(ARGV[1], "w")
+n_map = fp.readline.chomp
+puts n_map
+
+(1..n_map.to_i).each{|i|
+  blue = Containers::Queue.new([1])
+  orange = Containers::Queue.new([1])
+  order = Containers::Queue.new()
+  time = 0 #result
+  
+  queue = Containers::Queue.new()
+  fp.readline.chomp.split.each do |e|
+    queue.push(e)
+  end
+  numOfPresses = queue.pop
+  while queue.size > 0 do
+    temp = queue.pop
+    order.push(temp)
+    if temp == "O"
+      orange.push(queue.pop)
+    else
+      blue.push(queue.pop)
+    end
+  end
+  
+  blueCB = blue.pop.to_i
+  orangeCB = orange.pop.to_i
+  
+  if blue.size > 0
+    blueNB = blue.pop.to_i
+  else
+    blueNB = blueCB
+  end
+  
+  if orange.size > 0
+    orangeNB = orange.pop.to_i
+  else
+    orangeNB = orangeCB
+  end
+  
+  while order.size > 0 do
+    orderRobot = order.pop
+    if orderRobot == "O"
+      while is_go(orangeCB, orangeNB) do
+        blueCB = go(blueCB, blueNB)
+        orangeCB = go(orangeCB, orangeNB)
+        time = time + 1
+      end
+      time = time + 1
+      blueCB = go(blueCB, blueNB)
+      if orange.size > 0
+        orangeNB = orange.pop.to_i
+      end
+    elsif orderRobot == "B"
+      while is_go(blueCB, blueNB) do
+        blueCB = go(blueCB, blueNB)
+        orangeCB = go(orangeCB, orangeNB)
+        time = time + 1
+      end
+      time = time + 1
+      orangeCB = go(orangeCB, orangeNB)
+      if blue.size > 0
+        blueNB = blue.pop.to_i
+      end
+    end
+  end
+  
+  ofp.puts("Case ##{i}: #{time}")
+  puts("Case ##{i}: #{time}")
+}
+
+fp.close
+ofp.close

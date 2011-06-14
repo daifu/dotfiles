@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/Users/daifuye'
+let g:netrw_dirhist_2='/Users/daifuye/Desktop/Study/UCLA Spring 2011/CS M117/Android/HeartBeatSensor/heart-beat-sensor/cloud-tasks-io-read-only'
+let g:netrw_dirhist_3='/Users/daifuye/Desktop/Study/UCLA Spring 2011/CS M117/Android/HeartBeatSensor/heart-beat-sensor/cloud-tasks-io-read-only/CloudTasks-AppEngine'

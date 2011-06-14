@@ -1,0 +1,28 @@
+open OUnit;;
+open Type;;
+
+(* let test_appendall () =  *)
+(*    assert_equal [1;2;3;4;5;6;7;8;9] (appendall  *)
+(* [Node ((Node (Empty, 1, Empty)), 2, (Node(Empty, 3, Empty))); *)
+(* Node (Empty, 4, Empty);  *)
+(* Node (Node (Node (Empty, 5, Empty), 6, Node(Empty, 7, Empty)), 8, Node(Empty, 9, Empty))]);;  *)
+let test_appendall () =
+   assert-equal [1;2;3;4;5] (appendall 
+   [Node(Empty, 1, Empty);
+   Node(Empty, 2, Empty);
+   Node(Empty, 3, Empty);
+   Node(Empty, 4, Empty);
+   Node(Empty, 5, Empty)])
+;;
+
+
+(* Name the test cases and group them together *)
+let suite = 
+"suite">:::
+ ["test_appendall">:: test_appendall]
+;;
+
+let _ = 
+  run_test_tt_main suite
+;;
+

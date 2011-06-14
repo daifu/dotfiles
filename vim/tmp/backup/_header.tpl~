@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{if $controller_titile}{$controller_title} | {/if}{$app_title}</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{$site_root_path}assets/img/favicon.ico">
+    
+    <!-- custom css -->
+    <link type="text/css" rel="stylesheet" href="{$site_root_path}assets/css/style.css?v=1">
+	 <!-- css for handheld divice -->
+    <link type="text/css" rel="stylesheet" href="{$site_root_path}assets/css/handheld.css?v=1">
+
+</head>
+<body>

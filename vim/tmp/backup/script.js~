@@ -1,0 +1,169 @@
+/* Author: 
+
+*/
+$(document).ready(function(){
+app = {};
+
+app.tabs = function() {
+   var curParam = document.location.hash;
+   hideAllTabsExcept(curParam);
+   hideAndShow();
+   return false;
+}
+
+app.login = function() {
+   $("#login").click(function(){
+      
+   })
+}
+
+app.modelBox = function() {
+   //select all the a tag with name equal to modal
+   $('a[name=modal]').click(function(e) {
+      //Cancel the link behavior
+      e.preventDefault();
+
+      //Get the screen height and width
+      var maskHeight = $(document).height();
+      var maskWidth = $(window).width();
+
+      //Set heigth and width to mask to fill up the whole screen
+      $('#mask').css({'width':maskWidth,'height':maskHeight});
+
+      //transition effect     
+      $('#mask').fadeIn(1000);   
+      $('#mask').fadeTo("slow",0.8);   
+
+      //Get the window height and width
+      var winH = $(window).height();
+      var winW = $(window).width();
+      
+      $.post("login.php", function(data){
+         $("#login_box").html(data);
+         //Set the popup window to center
+         var dialog = $("#dialog1");
+         dialog.css('top',  winH/2-dialog.height()/2);
+         dialog.css('left', winW/2-dialog.width()/2);
+
+         //transition effect
+         dialog.fadeIn(2000); 
+      });
+      
+      $('html, body').animate({scrollTop:0}, 'slow');
+      return false;
+   });
+
+   //if close button is clicked
+   $('.window .close').click(function (e) {
+      //Cancel the link behavior
+      e.preventDefault();
+
+      $('#mask').hide();
+      $('.window').hide();
+   });      
+
+   //if mask is clicked
+   $('#mask').click(function () {
+      $(this).hide();
+      $('.window').hide();
+   });         
+}
+
+app.setMainHeight = function() {
+   var main_div = $("#main"), 
+       default_height = 600;
+   var win_height = $(document).height();
+   if(win_height > default_height)
+      main_div.css("min-height", win_height + "px");
+   return false;
+}
+
+app.fixButtonTag = function() {
+   $("#logout").click(function(){
+      if(navigator.appName === "Microsoft Internet Explorer") {
+         window.location = "/logout.php";
+      }
+   });
+}
+
+app.slideContorls = function() {
+   slideDownAndUp();
+}
+
+function hideAllTabsExcept(curPage) {
+   if(curPage) {
+    var home = [$("#home"), '#home'],
+        aboutTheProject = [$("#aboutTheProject"), '#aboutTheProject'],
+        aboutShubhaKumar = [$("#aboutShubhaKumar"), '#aboutShubhaKumar'],
+        divs = [home, aboutTheProject, aboutShubhaKumar];
+    for(var i = 0; i < 3; i++) {
+      if(curPage != divs[i][1])
+        divs[i][0].hide();
+     else
+        divs[i][0].show();
+    }
+   } else {
+      hideAllTabsExcept("#home");
+   }
+   return false;
+}
+
+function hideAndShow() {
+   var home = $(".navhome"),
+       aboutTheProject = $(".navaboutTheProject"),
+       aboutShubhaKumar = $(".navaboutShubhaKumar"),
+       divs = [home, aboutTheProject, aboutShubhaKumar];
+   for(var i = 0; i < 3; i++) {
+      divs[i].click(function(){
+         hideAllTabsExcept("#" + this.className.substring(3));
+      })
+   }
+   return false;
+}
+
+function hideAllDivsExcept(curDiv, controls) {
+   if(curDiv != undefined) {
+      for (var i = 0; i < controls.length; i++) {
+            $(controls[i]).slideUp("fast");
+         }
+      $(curDiv).slideDown("fast");
+   } else {
+      for (var i = 0; i < controls.length; i++) {
+            $(controls[i]).slideUp("fast");
+         }
+   }
+
+function slideDownAndUp() {
+   var divs = $("#slideButton").children();
+   var contentDivs = $("#slideContent").children();
+   hideAllDivsExcept(null, contentDivs);
+   for (var i = 0; i < divs.length; i++) {
+      $(divs[i]).click(function(coun){
+            var curId = "#" + this.id + "Content";
+            hideAllDivsExcept(curId, contentDivs);
+      });
+   };
+}
+
+app.tabs();
+app.modelBox();
+app.fixButtonTag();
+app.slideContorls();
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

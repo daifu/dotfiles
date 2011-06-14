@@ -1,0 +1,18 @@
+Unable to update:
+java.io.IOException: Error posting to URL: https://appengine.google.com/api/appversion/create?app_id=CaloricCounterManager&version=stage&
+400 Bad Request
+
+Client Error (400)
+The request is invalid for an unspecified reason.
+
+	at com.google.appengine.tools.admin.AbstractServerConnection.send(AbstractServerConnection.java:245)
+	at com.google.appengine.tools.admin.AbstractServerConnection.post(AbstractServerConnection.java:207)
+	at com.google.appengine.tools.admin.AppVersionUpload.send(AppVersionUpload.java:639)
+	at com.google.appengine.tools.admin.AppVersionUpload.beginTransaction(AppVersionUpload.java:446)
+	at com.google.appengine.tools.admin.AppVersionUpload.doUpload(AppVersionUpload.java:137)
+	at com.google.appengine.tools.admin.AppAdminImpl.doUpdate(AppAdminImpl.java:284)
+	at com.google.appengine.tools.admin.AppAdminImpl.update(AppAdminImpl.java:48)
+	at com.google.appengine.eclipse.core.proxy.AppEngineBridgeImpl.deploy(AppEngineBridgeImpl.java:401)
+	at com.google.appengine.eclipse.core.deploy.DeployProjectJob.runInWorkspace(DeployProjectJob.java:149)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:38)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)

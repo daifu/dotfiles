@@ -1,0 +1,117 @@
+#include <stdio.h>
+
+int bitMask(int, int);
+int isNonZero(int);
+int isPower2(int);
+void printbitssimple(int n);
+int addOK(int, int);
+int getByte(int x, int n);
+
+int main() {
+   /* bitMask(3,5); */
+   /* bitMask(5,5); */
+   
+   /* printf("isNonZero: %d\n", isNonZero(9)); */
+   /* printf("isNonZero: %d\n", isNonZero(0)); */
+   /* printf("isNonZero: %d\n", isNonZero(-2)); */
+   
+   /* printf("isPower2: %d\n", isPower2(2)); */
+   /* printf("isPower2: %d\n", isPower2(3)); */
+   /* printf("isPower2: %d\n", isPower2(-1)); */
+   /* int x = -9; */
+   /* printf("this is the signbit: %d\n", x>>31); */
+   /* printbitssimple(x); */
+   /*  */
+   /* int x = 2; */
+   /* int y = x << 3; */
+   /* printf("this is the addOK: %d\n", addOK(0x80000000,0x80000000)); */
+   /* printf("this is the addOK: %d\n", addOK(0x80000000,0x70000000)); */
+   /* printf("this is the addOK: %x\n", ~(1>>31)); */
+   /* printf("this is the addOK: %d\n", (0x80000000)); */
+   
+   /* printbitssimple(0x80000000); */
+   /* printf("\n"); */
+   /* printbitssimple(0xfffffffd); */
+   /* printf("\n"); */
+   /* printbitssimple(-5); */
+   /* printf("\n"); */
+   /* printbitssimple((1<<32)); */
+   /* printf("\n"); */
+   /* printbitssimple(0x80000000); */
+   /* printf("\n"); */
+   /* printbitssimple((1<<31)>>31); */
+   
+   /* printbitssimple(~(1>>31)); */
+   /* printf("\n"); */
+   /* printbitssimple((0>>31)); */
+   /* getByte(578366005 ,3) ; */
+   int signed_deleted = ~(~1>>31);
+   /* printbitssimple(signed_deleted); */
+   printf("this is the addOK: %x\n",signed_deleted);
+   printf("\n");
+   return 0;   
+}
+
+int bitMask(int highbit, int lowbit) {
+   /* Create a mask with 1's in the position 
+    * between highbit and lowbit*/
+   int negated_lowbit = ~(lowbit) + 1;
+   int sum = highbit + negated_lowbit;
+
+   printf("this is negative: %d\n", !sum);
+   
+   
+   printf("this is sum: %x\n", ~(~0 << (sum + 1)) << lowbit); 
+   return 2;
+}
+
+int isNonZero(int x) {
+   /* x = ((~0 << x) + 1) & x; */
+   x = (1 << x) & x;
+   /* printf("this is (~0 << x + 1): %d\n", (~0 << x) + 1); */
+   printf("this is x: %d\n", x);
+   /* x = ~x; */
+   /* printf("this is x again: %d\n", x); */
+   x = x & 1;
+   /* printf("this is x again again: %d\n", x); */
+   return x;
+}
+
+int isPower2(int x) {
+   int result = !((x - 1) & x);
+   return result;
+}
+
+/* Print n as a binary number */
+void printbitssimple(int n) {
+   unsigned int i;
+   i = 1<<(sizeof(n) * 8 - 1);
+
+   while (i > 0) {
+      if (n & i)
+         printf("1");
+      else
+         printf("0");
+      i >>= 1;
+   }
+}
+
+int addOK(int x, int y) {
+   int sum = x + y;
+   int result = (((~x)&(~y)&sum)|(x&y&(~sum)));
+   return !result;
+}
+
+/* 
+ * getByte - Extract byte n from word x
+ *   Bytes numbered from 0 (LSB) to 3 (MSB)
+ *   Examples: getByte(0x12345678,1) = 0x56
+ *   Legal ops: ! ~ & ^ | + << >>
+ *   Max ops: 6
+ *   Rating: 2
+ */
+int getByte(int x, int n) {
+   int moves = n << 3;
+   int result = (((0xFF << moves) & x) >> moves);
+   return result;
+}

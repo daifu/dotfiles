@@ -40,3 +40,4 @@ txtrst='\e[0m'    # Text Reset
 
 
 PS1="\n\u:\w \[$bldblk\]\$(vcprompt)\[$NO_COLOR\] \n➤ "
+# PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '

@@ -1,0 +1,11 @@
+from google.appengine.ext import db
+import Model
+
+class WorkOutController:
+   def __init__(self, hr, st, et):
+      self.heart_rate = hr
+      self.start_time = st
+      self.end_time = et
+
+   def storeData():
+      w = Model.HeartRateModel()

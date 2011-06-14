@@ -1,0 +1,8 @@
+#container
+  .header.group
+    %h1{:style => "width: 880px;"}
+      Daifu Ye's hacking demo
+  .messageList
+    %p
+      %bThis is the params:
+    = @message

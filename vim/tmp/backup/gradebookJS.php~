@@ -1,0 +1,12 @@
+<?php 
+header('Content-type: text/javascript');
+include("../../gradebook.php");
+
+$xml = new PhpAryToXML;
+$xml->setPHPArray($class);
+$obj = $xml->getXML();
+?>
+
+var obj = "<?php echo $obj; ?>";
+
+alert(obj);

@@ -1,0 +1,39 @@
+open OUnit
+
+let test_il2rl () = 
+   assert_equal [1.;2.;3.] (HigherOrder.il2rl [1;2;3]);
+   assert_equal [] (HigherOrder.il2rl [])
+;;
+
+let test_ordlist () = 
+   assert_equal [65; 98; 67] (HigherOrder.ordlist ['A';'b';'C']);
+   assert_equal [] (HigherOrder.ordlist [])
+;;
+
+let test_square () = 
+   assert_equal [1;4;9;16] (HigherOrder.squarelist [1;2;3;4]);
+   assert_equal [] (HigherOrder.squarelist [])
+;;
+
+let test_multpairs () = 
+   assert_equal [2;12] (HigherOrder.multpairs [(1,2);(3,4)]);
+   assert_equal [20;12;360] (HigherOrder.multpairs [(10,2);(3,4);(4,90)]);
+   assert_equal [] (HigherOrder.multpairs [])
+;;
+
+let test_inclist () = 
+   assert_equal [11;12;13;14] (HigherOrder.inclist [1;2;3;4] 10);
+   assert_equal [] (HigherOrder.inclist [] 0)
+;;
+
+let suite = "Test File" >:::
+   ["test_il2rl" >:: (test_il2rl);
+   "test_ordlist" >:: (test_ordlist);
+   "test_square" >:: (test_square);
+   "test_multpairs" >:: (test_multpairs);
+   "test_inclist" >:: (test_inclist)]
+;;
+
+let _ = 
+   run_test_tt_main suite
+;;

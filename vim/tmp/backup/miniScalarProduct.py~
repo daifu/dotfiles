@@ -1,0 +1,69 @@
+#!/Library/Frameworks/Python.framework/Versions/2.7/bin/python
+
+
+from __future__ import division
+
+import collections
+import itertools
+import sys
+
+class gcj:
+    IN = sys.stdin
+    number = 0
+
+    @classmethod
+    def case(cls):
+        cls.number += 1
+        return 'Case #%d:' % cls.number
+
+    @classmethod
+    def line(cls, type=str):
+        line = cls.IN.readline()
+        return type(line.strip('\n'))
+
+    @classmethod
+    def splitline(cls, type=str):
+        line = cls.IN.readline()
+        return (type(x) for x in line.split())
+
+def go():
+   num_lines = gcj.line(int)
+   for _ in xrange(num_lines):
+      n = gcj.line(int)
+      lst1 = [] 
+      lst2 = [] 
+      for x in gcj.splitline(int):
+         lst1.append(int(x))
+      for x in gcj.splitline(int):
+         lst2.append(int(x)) 
+
+      assert len(lst1) == n
+      assert len(lst2) == n
+      print gcj.case(), solve(lst1, lst2)
+
+def solve(lst1, lst2):
+   res = 0
+   n = len(lst1)
+   tmp = []
+   tmpSum = []
+  
+   for i in range(n):
+      lst1[i] * lst2[n - i]
+   
+   
+
+#for x in lst1:
+   #   print "x * y: "
+   #   for y in lst2:
+   #      tmp.append(x * y)
+   #      print x*y
+   #   print "sum of them : "
+   #   tmpSum.append(sum(tmp))
+   #   print sum(tmp)
+   #res = min(tmpSum)
+   #print "result: " 
+   #print res
+
+   return res
+
+go()

@@ -1,0 +1,40 @@
+#include "ccc_win.h"
+
+int ccc_win_main()
+{
+  // draw the head
+  Circle head( Point( 0, 0 ), 8 );
+  cwin << head;
+
+  // draw the nose
+  Point bridge( 0, 2 );
+  Point left_nos( -1, -1 );
+  Point right_nos( 1, -1 );
+  cwin << Line( left_nos, bridge )
+       << Line( bridge, right_nos )
+       << Line( right_nos, left_nos );
+
+  // change the coordinate system so that we can
+  // draw ovals
+  cwin.coord( -10, 40, 10, -40 );
+
+  // draw the mouth
+  Circle mouth( Point( 0, -15 ), 3 );
+  cwin << mouth;
+
+  // draw the eyes
+  Circle eye( Point( -3, 15 ), 1.75 );
+  cwin << eye;
+  eye.move( 6, 0 );
+  cwin << eye;
+
+  // put pupils in the eyes
+  // notice that yet another coordinate system is used here
+  cwin.coord( -40, 40, 40, -40 );
+  Circle pupil( Point( -12, 15 ), 1.5 );
+  cwin << pupil;
+  pupil.move( 24, 0 );
+  cwin << pupil;
+
+  return 0;
+}

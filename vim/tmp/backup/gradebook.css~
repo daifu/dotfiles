@@ -1,0 +1,398 @@
+body {
+   min-width: 960px;
+}
+
+div {
+   font-family: Arial,Liberation Sans,DejaVu Sans,sans-serif;
+}
+
+/* `Containers
+----------------------------------------------------------------------------------------------------*/
+
+.container {
+   margin-left: auto;
+   margin-right: auto;
+   width: 960px;
+}
+
+.header, .container
+.side-bar, .main,
+.info, .pic, 
+.name, .nav,
+.table, .logo-text,
+.titles, .content
+{
+   position: relative;
+   display: inline;
+   float: left;
+   margin-left: 10px;
+   margin-right: 10px;
+}
+
+#header {
+   width: 100%;
+   height: 60px;
+   background-image: -webkit-gradient(
+   linear,
+   left bottom,
+   left top,
+   color-stop(0.32, rgb(201,159,96)),
+   color-stop(0.66, rgb(232,181,105)),
+   color-stop(0.83, rgb(239,188,107))
+   );
+   background-image: -moz-linear-gradient(
+   center bottom,
+   rgb(201,159,96) 32%,
+   rgb(232,181,105) 66%,
+   rgb(239,188,107) 83%
+   );
+}
+.space {
+   height: 5px;
+   width: 100%;
+   background: #3d312b;
+   -moz-box-shadow: 0 2px 10px #333;
+   -webkit-box-shadow: 0 2px 10px #333;
+}
+.logo-text {
+   width: 300px;
+   color: #fff;
+   font-family: helvetica, arial;
+   font-weight: bold;
+   position: relative;
+   font-size: 30px;
+   text-shadow: 1px 1px 1px 1px #333;
+   line-height: 60px;
+   text-decoration: none;
+}
+
+.side-bar {
+   width: 300px;
+}
+.info {
+   width: 140px;
+}
+.pic {
+   margin: 15px 0;
+}
+.push-left {
+   margin-left: 75px;
+}
+
+.name {
+   width: 140px;
+}
+
+.main {
+   width: 620px;
+   margin: 15px 0;
+}
+
+.table {
+   margin: 15px 0px;
+}
+.titles {
+   background: #F7F7F7;
+   background: #EEE url(../images/table-shadow.png) repeat-x bottom left;
+}
+
+.titles ul li {
+   padding: 5px 0;
+   border-left: 1px solid #CDCDCD;
+   border-top: 1px solid #CDCDCD;
+}
+
+.titles ul li:last-child {
+   border-right: 1px solid #CDCDCD;
+}
+
+.table ul li{
+   width: 140px;
+   float: left;
+   text-align: center;
+}
+   
+.content {
+   border-top: 1px solid #CDCDCD;
+   border-bottom: 0;
+}
+
+.content ul li {
+   padding: 10px 0;
+   border-left: 1px solid #CDCDCD;
+   border-top: 1px solid #CDCDCD;
+}
+
+.cls {
+   height: 40px;
+}
+
+.hover {
+   background: url(../images/bg-overlay.png) repeat-x left;
+}
+.content ul li:last-child {
+   border-right: 1px solid #CDCDCD;
+}
+
+.table-shadow-wrap {
+   position: relative;
+}
+
+.table-shadow {
+   height: 35px;
+   width: 620px;
+   background: url(../images/content-bg.png) no-repeat 50% 0px;
+   border-top: 1px solid #CDCDCD;
+   position: absolute;
+   left: -25px;
+   top: 0px;
+}
+
+.left {
+   margin-right: 0;
+}
+
+.right {
+   margin-left: 0;
+}
+
+/* `Spacing
+----------------------------------------------------------------------------------------------------*/
+
+ol {
+   list-style: decimal;
+}
+
+ul {
+   list-style: none;
+}
+
+li {
+   margin-left: 30px;
+}
+
+p,
+dl,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ol,
+ul,
+pre,
+table,
+address,
+fieldset,
+figure {
+margin-bottom: 20px;
+}
+/* `Clear Floated Elements
+----------------------------------------------------------------------------------------------------*/
+
+/* http://sonspring.com/journal/clearing-floats */
+
+.clear {
+   clear: both;
+   display: block;
+   overflow: hidden;
+   visibility: hidden;
+   width: 0;
+   height: 0;
+}
+
+/* http://www.yuiblog.com/blog/2010/09/27/clearfix-reloaded-overflowhidden-demystified */
+
+.clearfix:before,
+.clearfix:after {
+   content: '\0020';
+   display: block;
+   overflow: hidden;
+   visibility: hidden;
+   width: 0;
+   height: 0;
+}
+
+.clearfix:after {
+   clear: both;
+}
+
+/*
+   The following zoom:1 rule is specifically for IE6 + IE7.
+   Move to separate stylesheet if invalid CSS is a problem.
+*/
+
+.clearfix {
+   zoom: 1;
+}/* `XHTML, HTML4, HTML5 Reset
+----------------------------------------------------------------------------------------------------*/
+
+a,
+abbr,
+acronym,
+address,
+applet,
+article,
+aside,
+audio,
+b,
+big,
+blockquote,
+body,
+canvas,
+caption,
+center,
+cite,
+code,
+dd,
+del,
+details,
+dfn,
+dialog,
+div,
+dl,
+dt,
+em,
+embed,
+fieldset,
+figcaption,
+figure,
+font,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+hgroup,
+hr,
+html,
+i,
+iframe,
+img,
+ins,
+kbd,
+label,
+legend,
+li,
+mark,
+menu,
+meter,
+nav,
+object,
+ol,
+output,
+p,
+pre,
+progress,
+q,
+rp,
+rt,
+ruby,
+s,
+samp,
+section,
+small,
+span,
+strike,
+strong,
+sub,
+summary,
+sup,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+time,
+tr,
+tt,
+u,
+ul,
+var,
+video,
+xmp {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+/*
+  Override the default (display: inline) for
+  browsers that do not recognize HTML5 tags.
+
+  IE8 (and lower) requires a shiv:
+  http://ejohn.org/blog/html5-shiv
+*/
+  display: block;
+}
+
+b,
+strong {
+/*
+  Makes browsers agree.
+  IE + Opera = font-weight: bold.
+  Gecko + WebKit = font-weight: bolder.
+*/
+  font-weight: bold;
+}
+
+img {
+  font-size: 0;
+  vertical-align: middle;
+/*
+  For IE.
+  http://css-tricks.com/ie-fix-bicubic-scaling-for-images
+*/
+  -ms-interpolation-mode: bicubic;
+}
+
+li {
+/*
+  For IE6 + IE7.
+*/
+  display: list-item;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+th,
+td,
+caption {
+  font-weight: normal;
+  vertical-align: top;
+  text-align: left;
+}
+
+svg {
+/*
+  For IE9.
+*/
+  overflow: hidden;
+}

@@ -1,0 +1,10 @@
+let rec fibo = function
+  | 0 | 1 -> 1
+  | n -> (fibo (n - 2)) + (fibo (n - 1))
+
+let () =
+    for i = 1 to 10 do
+      ignore (fibo 30);
+      ignore (try raise Not_found with _ -> 1 + 1);
+    done
+

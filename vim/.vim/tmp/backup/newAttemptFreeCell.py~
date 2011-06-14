@@ -1,0 +1,89 @@
+#!/Library/Frameworks/Python.framework/Versions/2.7/bin/python
+
+import sys
+def memoize(function):
+   cache = {}
+   def decorated_function(*args):
+      if args in cache:
+         return cache[args]
+      else:
+         val = function(*args)
+         cache[args] = val
+         return val
+   return decorated_function 
+
+
+@memoize
+def checkD(n, Pd):
+   if (n > 0) and (n * Pd % 100 == 0):
+      return "Possible"
+   elif n == 0:
+      return "Broken"
+   else:
+      return checkD(n - 1, Pd) 
+
+
+#This is for brute force searching
+def memoizing(func):
+   """Function decorator to cache a function's output."""
+   memos = dict()
+   def memoize(*args):
+     if args in memos:
+        return memos[args]
+     res = func(*args)
+     memos[args] = res
+     return res
+   return memoize
+
+def calPrecentage(numerator, denominator):
+   """calculate the precenage"""
+   return numerator * 100. / denominator
+
+def loops(N):
+   res = "Broken"
+   for x in range(1, (N + 1)):
+      for y in range(1, x):
+         tmp = calPrecentage(y, x)
+         return tmp
+ 
+
+
+def solve(f):
+   res = "Broken" 
+   lst = []
+   lst.append([int(x) for x in f.readline().split()])
+   N = 0
+   Pd = 0
+   Pg = 0
+   for x in lst:
+      N = x[0]
+      Pd = x[1]
+      Pg = x[2]
+   
+   if (Pd == 0 and Pg == 0):
+      res = "Possible"
+   elif (Pd == 100 and Pg == 100):
+      res = "Possible"
+   elif (Pd != 100 and Pg == 100):
+      res = "Broken"
+   elif (Pd > 0 and Pg == 0):
+      res = "Broken"
+   else:
+      res = checkD(N, Pd)
+      #loops(N) 
+      #memoizing(loop(N))
+      #if (float(Pd) == tmp):
+      #   #print "Pd : "
+      #   #print Pd, y, x
+      #   res = "Possible"
+      #   return res
+   return  res
+
+
+
+f = sys.stdin
+n = int(f.readline())
+
+for i in xrange(n):
+   res = solve(f)
+   print "Case #%d: %s" % (i+1, res)

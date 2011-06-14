@@ -1,0 +1,46 @@
+(* input type: 'a * 'a list;
+ * return type: 'a list*)
+let rec remove (x, lst):'a list = 
+   match lst with
+      | [] -> []
+      | y::ys -> if x = y then
+                  remove(x,ys)
+               else 
+                  y::remove(x, ys)
+
+let rec countList (lst) :'a int = 
+   match lst with
+      | [] -> 0 
+      | x::xs -> 1 + countList(xs)
+
+
+(* duplicate all the items *)
+(* remove the duplicated items  *)
+let rec dup(lst) : 'a list =
+   match lst with
+      | [] -> []
+      | x::y::xs -> if x = y then
+                     x::dup(y::xs)
+                    else
+                     x::y::dup(y::xs) 
+                    
+type calories = Apple of float | Orange of float;                     
+
+let findMaxCalories(lst): 'a float =
+   let rec findMaxHelp (max, checkedList) =
+       match checkedList with
+         | [] -> max
+         | Orange f ->  if  > max then
+                        findMaxHelp(x, xs) 
+                     else
+                        findMaxHelp(max, xs)
+         | Apple f -> if 
+   in
+      findMaxHelp(0.0, lst)
+
+let rec helperFindmaxCal(lst, n) = match lst with
+   | [] -> n
+   | h::tl -> match h with
+               Orange f -> if f > n then helperFindmaxCal(tl, f) else helperFindmaxCal(tl, n)
+               Apple f -> if f > n then helperFindmaxCal(tl, f) with helperFindmaxCal(tl, n)
+;;

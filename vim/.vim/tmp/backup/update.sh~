@@ -1,0 +1,32 @@
+#!/bin/sh
+
+#check current directory
+# if ["$PWD" != "/Users/daifuye/Desktop/Study/UCLA\ Spring\ 2011"]; then
+#    cd /Users/daifuye/Desktop/Study/UCLA\ Spring\ 2011
+# fi
+
+#Delete the .DS_Store files
+rm -r .DS_Store
+
+#create error log file
+# if [-f !error.log]
+# then
+
+
+#git add
+git add .
+
+#git commit
+git commit -am "update files"
+
+#Go to Dropbox to update
+cd ~/Dropbox/git/UCLA\ Spring\ 2011
+
+#Git update
+git pull origin master
+
+#check git status git status
+git status
+
+#check the result is good or not
+

@@ -1,0 +1,48 @@
+let il2rl lst = List.map (fun (x:int) -> float(x)) lst 
+(* let il2rl lst = List.fold_left (fun reL lstItem-> (float lstItem)::reL) [] lst  *)
+
+let ordlist lst = List.map (fun (x:char) -> Char.code(x)) lst 
+
+let squarelist lst = List.map (fun x -> x * x) lst
+
+let multpairs lst = List.fold_right (fun (x, y) reL -> (x * y)::reL) lst []
+
+let inclist lst base = List.fold_right (fun lstItem reL -> (lstItem + base)::reL) lst []
+
+let bor lst = List.fold_left (fun reV lstItem -> lstItem || reV) false lst 
+
+let append lst1 lst2 = List.fold_right (fun item2 reL -> item2::reL) lst1 lst2
+
+let convert lst =  List.fold_right (fun (x,y) (a,b) -> (x::a, y::b)) lst ([], []) 
+
+let count lst = List.fold_right (fun item reL -> match reL with 
+                                                     [] ->float(List.length(lst) - 1)::reL 
+                                                   | hd::tl -> (hd -. 1.)::reL) lst []
+
+let eval lst x = List.fold_left2 (fun reV coe exp -> reV +. coe *. (x ** exp)) 0. lst (count lst);;
+
+let rec mymap f lst = match lst with
+                        [] -> []
+                      | hd::tl -> (f hd)::(mymap f tl)
+
+let rec mymapTail f lst acc = match lst with
+                                [] -> acc
+                              | hd::tl -> let acc = acc@[(f hd)] in 
+                                             (mymapTail f tl acc)
+
+let rec foldr f lst returnL = match lst with
+                                 [] -> returnL 
+                              | hd::tl -> f hd (foldr f tl returnL) 
+
+let rec foldl f returnL lst = match lst with
+                                [] -> returnL 
+                              | hd::tl -> (let reL = (f returnL hd) in 
+                                             foldl f reL tl)
+
+let reverse lst = foldl (fun reL x -> x::reL) [] lst
+
+let rec foldrTailHelper f lst returnL = match lst with
+                                    [] -> returnL
+                                    | hd::tl -> let reL=(f hd returnL) in foldrTailHelper f tl reL
+
+let foldrTail f lst returnL = let revL = (reverse lst) in foldrTailHelper f revL returnL 

@@ -1,0 +1,8 @@
+<html> 
+rror("wrong number of operands")
+<head> 
+	<script type="text/javascript" src="lib/background_mini.js"></script>
+</head> 
+<body onload="init();">
+</body>
+</html>

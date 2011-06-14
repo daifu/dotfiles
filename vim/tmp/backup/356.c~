@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+int loop(int x, int n)
+{
+   int result = -1;
+   int mask;
+   for(mask = 1; mask != 0 ; mask = mask << n )
+   {
+      result ^= (mask & x);
+   }
+   
+   printf("this is result: %d\n", result);
+   return result;
+}
+
+int main() {
+   loop(10, 2);
+}

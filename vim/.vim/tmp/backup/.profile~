@@ -1,0 +1,10 @@
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"
+##
+# Your previous /Users/daifuye/.profile file was backed up as /Users/daifuye/.profile.macports-saved_2010-07-17_at_13:40:09
+##
+
+# MacPorts Installer addition on 2010-07-17_at_13:40:09: adding an appropriate PATH variable for use with MacPorts.
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+# Finished adapting your PATH environment variable for use with MacPorts.
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"

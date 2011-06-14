@@ -1,0 +1,14 @@
+After reading an article from UCLA Linux Users Group (http://linux.ucla.edu/lugwiki/resources:linux-security-how-not-to-get-hacked), I learnt some 
+important and intro knowledge to keep my linux operating system more secure, such as disabling unused services in my linux system, keeping the safety codes
+from social engineering, and continually keeping track of bleeding edge security issues on linux. At first, we should try to avoid using the telnet (insecure
+remote shell) service, which can disable some hackers to connect to your computer with telnet insecurely. The instruction for editing the services on the website is not for Ubuntu. After I googling, I found out 
+a correct way to do it in Ubuntu as follow. In order to disable all those insecure services at the Ubuntu, users should install xinetd (sudo apt-get install 
+xinetd), then edit the file xinetd.conf, and then restart the command xinetd to apply the changes in the system (sudo /etc/init.d/xinetd restart). Secondly, 
+the most secure servers or computers will be attacked easily by hackers because users used insecure way to organize their password and username, such 
+as using “password” or their name or birthday or any information about the users as password. Maybe users passed out their password and username without verifying 
+other people’s identities. Lastly, we should always stay aware of the latest news on security developments on Ubuntu, such as following a security mailing 
+list (likes BugTraq) and applying security updates for your Ubuntu. After viewing the security issues, I found out the latest vulnerability on browsers 
+using WebKit, which is “WebKit Use-After-Free Remote Code Execution Vulnerability”, and the successful attacks will allow attackers to execute arbitrary 
+code within the context of the application. Unfortunately, there is no solution for this vulnerability currently. What we can do right now is keep track 
+of the updates from the mailing list and try not to use WebKit browsers. Finally, It is crucial to keep our computers secure everyday and it can avoid 
+a lot of troubles later on.

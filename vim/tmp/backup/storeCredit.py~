@@ -1,0 +1,6 @@
+class storeCredit:
+   #Find two integers that addup to a certain number
+   def readFile(self, file_name):
+      open(file_name, "r")
+   def compare(self, arg1, arg2):
+      

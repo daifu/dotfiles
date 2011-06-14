@@ -1,0 +1,58 @@
+#use "hw4.ml";;
+
+let evalTests = [("(Expr.buildSin(Expr.buildAvg(Expr.buildX,Expr.buildY))) (0.5,0.0)", "0.707106781186547462"); 
+("Expr. sampleExpr (0.1, 0.1)"), ("0.569335014033423459")]
+
+  
+(* PRETTY PRINTING *)
+
+(* Print a 'sep'-separated list of things. *)	    
+let rec print_lst (f:'a -> string) (l:'a list) (sep:string) :string =
+  match l with
+      [] -> ""
+    | [x] -> (f x)
+    | x::xs -> (f x) ^ sep ^ print_lst f xs sep
+	    
+let rec print_typ (t:float) :float =
+  match t with
+   t -> t
+
+(* let rec print_val (v:movalue) :string = *)
+(*   match v with *)
+(*       IntVal(i) -> string_of_int i *)
+(*     | BoolVal(b) -> string_of_bool b *)
+(*     | FunVal(_) -> "<fun>" *)
+(*     | TupleVal(vs) -> *)
+(* 	"(" ^ print_lst print_val vs ", " ^ ")" *)
+
+(* The Test Harness *)	  
+  
+let testOne (test, expectedResult)  testF =
+  try
+    let expr = main token (Lexing.from_string (test^";;")) in
+    testF expr
+  with
+      Parsing.Parse_error -> "parse error"
+
+let testF f e =
+  try
+    f e
+  with
+    Error -> "General Error"
+      
+let test f tests =
+  let results =
+    List.map
+      (function pair -> testOne pair (testF f))
+      tests
+  in
+  List.iter2
+    (fun (t,er) r ->
+      let out = if er=r then "ok" else "expected " ^ er ^ " but got " ^ r in
+      print_endline
+	(t ^ "....................." ^ out))
+      tests results
+
+(* CALL THESE FUNCTIONS TO RUN THE TESTS *)
+let testEval () = test (fun e -> print_typ (Expr.eval e)) evalTests
+  

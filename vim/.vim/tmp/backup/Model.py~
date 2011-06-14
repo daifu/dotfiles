@@ -1,0 +1,15 @@
+from google.appengine.ext import db
+
+class UsersModel(db.Model):
+   name = db.StringProperty(required=True)
+   created_at = db.DateProperty()
+   #account = db.UserProperty()
+   gender = db.StringProperty(required=True, choices=set(["male", "female"]))
+   age = db.IntegerProperty(required=True)
+   weight = db.FloatProperty(required=True)
+   #wUnit = db.StringProperty(required=True, choices=set(["kg", "lb"]))
+
+class HeartRateModel(db.Model):
+   user = db.ReferenceProperty(UsersModel)
+   calorie = db.FloatProperty(required=True)
+   workoutTime = db.StringProperty()

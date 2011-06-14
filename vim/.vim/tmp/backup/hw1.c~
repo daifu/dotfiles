@@ -1,0 +1,91 @@
+#include <stdio.h>
+
+int leftmost_one(unsigned);
+void printbitssimple(unsigned);
+/* void copy_int(int val, void *buf, int maxbytes); */
+
+/* Declaration of data type where 4 bytes are packed
+ * into a unsigned.*/
+typedef unsigned packed_t;
+
+/* Extract byte from word. Return as signed integer */
+int xbyte(packed_t word, int bytenum);
+
+int main() {
+   /* packed_t x = 0xFF884422; */
+   /* printf("ths is leftmost_one: %x\n", x); */
+   /* printbitssimple(leftmost_one(x)); */
+   /* printf("\n"); */
+   /* printf("this is leftmost_one: %x\n", (x<<3)); */
+
+   /* printf("this is leftmost_one: %x\n", xbyte(x, 3)); */
+   /* printf("this is leftmost_one: %x\n", xbyte_work(x, 3)); */
+   /* printbitssimple(leftmost_one((~x) ^ x)); */
+   /* printf("\n"); */
+   /* printf("this is leftmost_one: %x\n", leftmost_one(0x1)); */
+   /* printbitssimple(leftmost_one(0x6600)); */
+   /* printf("\n"); */
+   /* packed_t word = 0x22000000; */
+   /* int bytenum = 0x9900; */
+   /* printf("this is from xbyte: %x\n", xbyte(word, bytenum)); */
+   /* printf("this is from xbyte_work: %x\n", xbyte_work(word, bytenum)); */
+   /* void *buf; */
+
+   /* copy_int(3, buf, 2); */
+   int val = 3;
+   int maxbytes = 2;
+   if((long)maxbytes - sizeof(val) >= 0) {
+      printf("this is the sizeof val: %ld\n", sizeof(val));
+      printf("this is maxbytes: %d\n", maxbytes);
+      printf("Dam\n");
+   }
+   return 0;
+}
+
+int leftmost_one(unsigned x) {
+   /* return a mask that indicated the left
+    * most bit of the unsigned number.*/
+   int temp_mask;
+   int result;
+
+   x = (x>>1)|x;//To make first 1 of right is all to be 1
+   x = (x>>2)|x; 
+   x = (x>>4)|x;
+   x = (x>>8)|x;
+   x = (x>>16)|x;
+   temp_mask = ~(x >> 1);
+   result = x & temp_mask;
+   return result;
+}
+
+/* Print n as a binary number */
+void printbitssimple(unsigned n) {
+   unsigned int i;
+   i = 1<<(sizeof(n) * 8 - 1);
+
+   while (i > 0) {
+      if (n & i)
+         printf("1");
+      else
+         printf("0");
+      i >>= 1;
+   }
+}
+
+/* Failed attempt at xbyte */
+int xbyte(packed_t word, int bytenum) 
+{
+   return (word >> (bytenum << 3) & 0xFF);
+}
+/* convert the unsigned int to signed */
+/* Input:  */
+int xbyte_work(packed_t word, int bytenum)
+{
+  return (int)((word << (24 - (bytenum << 3))) >> 24); 
+}
+
+/* A: What is wrong with this code? */
+/* Not sure why it happens, maybe when it return the value is unsigned int instead of the correct type - int. */
+/* B: Give a correct implementtation of the function that uses only left and right shifts, along with one subtraction. */
+
+

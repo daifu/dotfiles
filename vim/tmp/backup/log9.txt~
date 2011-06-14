@@ -1,0 +1,46 @@
+#Create 8 bytes random double-precisison floating point numbers
+od --width=8 -N 1600000 -t fF < /dev/urandom > floatNum.txt
+
+#Delete the first two columns of numbers.
+sed ‘s/.{24}//g’ floatNum.txt > floatNum_new.txt
+
+#Delete all the whitespace beofre the positive floating point number
+sed -e ‘s/^[ ]*//’ floatNum_new.txt 
+
+#Remove the last nonfloating point number
+sed 's/[0-9]\{7\}//' floatNum_new.txt
+
+#Remove the last newline
+sed '/^$/d' floatNum_new1.txt > floatNum.txt 
+
+#sort and get the time
+/usr/bin/time -p sort -g floatNum_new.txt > /dev/null 
+
+real 1.90
+user 1.89
+sys 0.00
+
+/usr/bin/time -p /usr/local/cs/bin/sort  -g floatNum_new.txt > /dev/null
+real 0.56
+user 2.69
+sys 0.03
+
+/usr/bin/time -p /usr/local/cs/bin/sort -g --parallel=1 floatNum_new.txt > /dev/null
+real 1.93
+user 1.92
+sys 0.00
+
+/usr/bin/time -p /usr/local/cs/bin/sort -g --parallel=2 floatNum_new.txt > /dev/null
+real 1.11
+user 2.12
+sys 0.00
+
+/usr/bin/time -p /usr/local/cs/bin/sort -g --parallel=4 floatNum_new.txt > /dev/null
+real 0.76
+user 2.52
+sys 0.01
+
+/usr/bin/time -p /usr/local/cs/bin/sort -g --parallel=8 floatNum_new.txt > /dev/null
+real 0.54
+user 2.68
+sys 0.02

@@ -1,0 +1,142 @@
+type suit = Spades | Hearts | Diamonds | Clubs
+
+let suitname su = match su with
+                    Spades -> "spades"
+                  | Hearts -> "hearts"
+                  | Diamonds -> "diamonds"
+                  | Clubs -> "clubs" 
+
+type number = Int of int | Real of float
+
+let plus num1 num2 = match (num1, num2) with
+                        | (Int a, Int b) -> Int (a + b)
+                        | (Real c, Real d) -> Real (c +. d)
+
+type intnest = 
+   INT of int
+   |LIST of intnest list
+
+let rec addup (inest:intnest) = 
+   match inest with
+      INT i -> i
+    | LIST lst -> match lst with
+                     [] -> 0 
+                   | hd::tl -> (addup hd) + (addup (LIST tl))
+
+type 'a mylist = NIL | CONS of 'a * 'a mylist
+
+let rec prod lst = match lst with
+                 NIL -> 1
+               | CONS (intL1, mlist) -> intL1 * (prod mlist) 
+
+(* let rec reverse lst =  *)
+(*    match lst with *)
+(*       NIL -> NIL *)
+(*       | CONS (ele, mlist) -> match mlist with *)
+(*                NIL -> CONS (ele, NIL) *)
+(*                | CONS(ele2, mlist2) -> CONS(ele2, (reverse (CONS(ele, mlist2)))) *)
+
+(* This is the best to implement the reverse function in
+* the list and anytype.*)
+let reverse lst = 
+   let rec revHelper(suffixToReverse, reversedPrefix) = 
+      match suffixToReverse with
+         | NIL -> reversedPrefix
+         | CONS(ele, mlist) -> revHelper(mlist, CONS(ele, reversedPrefix))
+   in
+      revHelper(lst, NIL)
+
+
+let rec append lst1 lst2 = 
+   match lst1 with
+   | NIL -> lst2
+   | CONS (ele, mlist) -> CONS (ele, (append mlist lst2)) 
+
+
+type 'a tree = Empty | Node of 'a tree * 'a * 'a tree
+
+let rec traverseHelper oneTree = 
+   match oneTree with
+   Empty -> [] 
+   |  Node (l1, a1, r1) -> (traverseHelper l1)@[a1]@(traverseHelper r1)
+
+(* let rec traverseHelperTail oneTree lst =  *)
+(*    match oneTree with *)
+(*       Empty -> lst  *)
+(*    | Node (l, d, r) -> (traverseHelperTail l (d::lst))@(traverseHelperTail r lst)  *)
+(*  *)
+(* appendall [(Node(Node(Node(Empty, 5, Node(Empty, 6, Empty)), 7, Empty), 8, Empty)); (Node(Empty, 4, Empty)); (Node(Empty, 6, Empty))];; *)
+let rec appendall lst = 
+   match lst with
+      [] -> []
+      | hd::tl -> (traverseHelper hd)@(appendall tl)
+
+
+(* Test case: (Node(Node(Node(Empty, 5, Node(Empty, 6, Empty)), 7, Empty), 8, Empty))
+Node(Empty, 3, Empty);
+Node(Node(Empty, 4, Empty), 5, Empty);
+ (Node(Node(Node(Node(Empty, 4, Empty), 5, Node(Empty, 6, Empty)), 7, Node(Empty, 9, Empty)), 8, Node(Empty, 10, Empty)))
+(Node(Node(Empty, 4, Empty), 5, Node(Empty, 6, Empty)))
+
+*)
+let rec isComplete tre check= 
+   match tre with
+      Empty -> check 
+      |Node (l, d, r) -> (isComplete l (l=r)) && (isComplete r (l=r))
+
+let rec makeBST lst f = 
+   match lst with
+      [] -> Empty
+      |x::[] -> Node(Empty, x, Empty)
+      |x::y::tl -> if f x y then Node(Node(Empty, y, Empty), x, (makeBST tl f)) 
+                   else Node((makeBST tl f), x, Node(Empty, y, Empty))
+
+
+(* let makeBST lst f = *)
+(*    let rec helper(suffix, addedPrefix) =  *)
+(*          match suffix with *)
+(*             [] -> addedPrefix *)
+(*             |hd::tl -> helper(tl, Node(l, d, r))  *)
+(*  *)
+exception InvalidIndex
+exception EmptyList
+
+let rec index lst v = match lst with
+                        [] -> raise InvalidIndex
+                       |x::xs -> if v = (List.length(lst) - List.length(xs) - 1) 
+                                 then x else (index xs (v - 1))
+
+let rec revLeft lst = List.fold_right (fun ele reL -> reL@[ele]) lst [];;
+
+let rec fib n acc1 acc2 = match n with
+                           |0 -> acc2
+                           |_-> let temp2 = acc1 + acc2 in
+                                let temp1 = acc2 in
+                                    fib (n-1) temp1 temp2 
+                                
+let maxMin (lst:'a list) : 'a * 'a =
+   match lst with 
+      [] -> raise EmptyList
+      |x::xs -> 
+   let rec maxMinHelper lst max min = 
+      match lst with
+         [] -> (max, min) 
+        |hd::tl -> if hd > max then (maxMinHelper tl hd min) 
+                  else if hd < min then (maxMinHelper tl max hd)
+                  else (maxMinHelper tl max min)
+   in 
+      (maxMinHelper xs x x)
+
+let interval lst init last: 'a list = 
+   let rec inHelper lst init last iniC returnList =  
+      match lst with
+         | [] -> raise EmptyList
+         | x::xs ->  if (iniC >= init && iniC <= last) 
+         then (inHelper xs init last (iniC + 1) (returnList@[x]))
+                     else if (iniC < last) then
+                        (inHelper xs init last (iniC + 1) returnList) 
+                     else returnList
+   in
+       inHelper lst init last 0 []
+
+

@@ -1,0 +1,42 @@
+<?php
+/**
+ * Home Controller
+ * @TODO Display all the books by category
+ */
+class HomeController extends GlobalsroiController {
+    /**
+     * @var int
+     */
+    protected $current_page;
+
+    /**
+     * Constructor
+     * @param bool $session_started
+     */
+    public function __construct($session_started=false) {
+        parent::__construct($session_started);
+        //@TODO Initialize the Book DAO
+    }
+
+    /**
+     * Show the listing of books
+     * @return string rendered view markup
+     */
+    public function control() {
+        $this->setViewTemplate('home.tpl');
+        $this->addToView('logo_link', 'home.php');
+
+        //if $_GET["t"], load individual post + replies + retweets
+        //TODO: deprecate the t (for tweet) to p (for post), but don't break existing URLs
+        // if (isset($_GET['t'])) {
+        //     //default network to twitter if not specified (don't break existing URLS)
+        //     $network = (isset($_GET['n']) )?$_GET['n']:'twitter';
+        //     $_GET['n'] = $network;
+        //     if ($this->shouldRefreshCache()) {
+        //         $this->loadSinglePostThread($_GET['t'], $network);
+        //     }
+        // }
+        return $this->generateView();
+    }
+
+}

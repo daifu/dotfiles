@@ -1,0 +1,26 @@
+module LiknList:LINK = struct
+   type int linklist = Null | Node of int * int linklist
+   
+   exception EmptyList
+   
+   let create = Null
+
+   let head ll = match ll with
+                  Null -> raise EmptyList
+                  |Node (ele, subll) -> a
+
+   let rec push ll v = match ll with
+                     Null -> Node(v, Null)
+                     |Node (ele, subll) -> push subll v
+
+   let rec length ll = match ll with
+                     Null -> 0
+                     |Node(ele, subll) -> 
+                           let rec count subll sum = 
+                              match subll with
+                                Null -> 1
+                               |Node(ele2, subll2) -> count subll2 (sum + 1)
+                           in
+                              count subll 0
+   
+

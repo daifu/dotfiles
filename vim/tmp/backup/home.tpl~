@@ -1,0 +1,10 @@
+{include file="_header.tpl"}
+
+<p>Hello World, you make it here!</p>
+
+<p>Map Here:</p>
+
+
+
+
+{include file="_footer.tpl"}
