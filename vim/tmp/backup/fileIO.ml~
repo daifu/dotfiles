@@ -1,3 +1,0 @@
-let fileStrs filename = Std.input_list (open_in filename) 
-
-let readChars filename = Std.input_list (open_in filename)

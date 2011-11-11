@@ -1,9 +1,0 @@
-
---This line, and those below, will be ignored--
-
-M    app.yaml
-M    User.py
-M    Model.py
-M    ValidateData.py
-M    main.py
-A    WorkOutController.py

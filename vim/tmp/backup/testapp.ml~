@@ -1,4 +1,0 @@
-let fun1 (l1: list) = List.fold_right (fun itemA returnL -> 
-                                  match returnL with
-                                    [] -> itemA::[] 
-                                   |head::rest -> itemA::rest) l1 [[]]; 

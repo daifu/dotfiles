@@ -1,6 +1,0 @@
-export EDITOR="mvim"
-export PATH=~/bin:$PATH
-export CLICOLOR=1
-export LSCOLORS=ExFxCxDxBxegedabagacad
-export PATH=$PATH:/opt/local/bin/:/Users/daifuye/Downloads/Applications/android-sdk-mac_x86/platform-tools:/Users/daifuye/Downloads/Applications/android-sdk-mac_x86/tools
-epxort VIM=$PATH:/usr/share/vim
