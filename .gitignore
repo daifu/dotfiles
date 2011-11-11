@@ -1,3 +1,6 @@
 .DS_Store
 *.swp
 ssh/
+tmp/*
+vim/tmp/*
+vim/tmp/backup/*

@@ -1,2 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =0
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/daifuye/Documents/Apps/uclaregistrar'
+let g:netrw_dirhist_2='/Applications/MAMP/htdocs/ci_series'
+let g:netrw_dirhist_3='/Users/daifuye/Documents/Apps/uclaregistrar'
+let g:netrw_dirhist_4='/Applications/MAMP/htdocs/CS130-Mashup-Daifu/web'
+let g:netrw_dirhist_5='/Users/daifuye/bin/dotfiles'
+let g:netrw_dirhist_6='/Users/daifuye/bin/dotfiles/vim/plugin'

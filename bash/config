@@ -41,3 +41,11 @@ txtrst='\e[0m'    # Text Reset
 
 # PS1="\n\u:\w \[$bldblk\]\$(vcprompt)\[$NO_COLOR\] \n➤ "
 # PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+
+if [ -e /usr/share/terminfo/x/xterm-256color ]; then
+        export TERM='xterm-256color'
+else
+        export TERM='xterm-color'
+fi
