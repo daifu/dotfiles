@@ -4,3 +4,4 @@ ssh/
 tmp/*
 vim/tmp/*
 vim/tmp/backup/*
+backup/*
